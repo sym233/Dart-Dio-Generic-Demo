@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'Login.dart';
 import 'Logout.dart';
+import 'ProjectSelect.dart';
 
 part 'BasicResponse.g.dart';
 
@@ -34,6 +35,9 @@ class _Converter<T> implements JsonConverter<T, Object> {
         return Login.fromJson(json as Map<String, dynamic>) as T;
       case 'Logout':
         return Logout.fromJson(json) as T;
+      case 'List<ProjectSelect>':
+        return (json as List).map((e) => ProjectSelect.fromJson(e)).toList()
+            as T;
       default:
         ;
     }

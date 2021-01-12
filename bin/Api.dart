@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:dio/adapter.dart';
 
 import 'Storage.dart';
+import 'Types/ProjectSelect.dart';
 import 'Url.dart';
 import 'Types/BasicResponse.dart';
 import 'Types/Login.dart';
@@ -53,6 +54,15 @@ class Api {
     try {
       var response = await _dio.get(Url.logout);
       return BasicResponse<Logout>.fromJson(response.data).data;
+    } on DioError catch (e) {
+      throw (e.message);
+    }
+  }
+
+  Future<List<ProjectSelect>> projectSelect() async {
+    try {
+      var response = await _dio.get(Url.projectSelect);
+      return BasicResponse<List<ProjectSelect>>.fromJson(response.data).data;
     } on DioError catch (e) {
       throw (e.message);
     }

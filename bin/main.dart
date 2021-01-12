@@ -7,6 +7,11 @@ Future<void> main() async {
   print('hello, ${loginResult.name}');
   var token = await Storage().getToken();
   print('your token is $token');
-  await Api(interceptors: [AuthIntercept()]).logout();
+  var api = Api(interceptors: [AuthIntercept()]);
+  var ps = await api.projectSelect();
+  for (var p in ps) {
+    print('project: ${p.name} - ${p.no}');
+  }
+  await api.logout();
   print('log out succeeded.');
 }
